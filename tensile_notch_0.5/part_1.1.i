@@ -20,7 +20,7 @@
 [Materials]
   [./elasticity_tensor]
     type = ComputeIsotropicElasticityTensor
-    youngs_modulus = 2.1e5
+    youngs_modulus = 210.0e9
     poissons_ratio = 0.3
   [../]
   [./stress]

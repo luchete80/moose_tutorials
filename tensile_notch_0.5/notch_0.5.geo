@@ -24,7 +24,7 @@ Line(8)   = {8,4};
 
 Line(9)   = {2,9};
 Line(10)  = {9,10};
-Line(11)  = {10,6};
+Line(11)  = {10,8};
 
 Curve Loop(1) = {1,2,3,4};
 Plane Surface(1) = {1};
@@ -53,5 +53,6 @@ Surface Loop(1) = {26, 13, 1, 17, 21, 25};
 // HAS TO BE STABLISHED A VOLUME IN ORDER TO KEEP THE ELEMENTS
 Physical Volume("vol1", 1) = {1};
 Physical Volume("vol2", 2) = {2};
+Physical Volume("vol3", 3) = {3};
 //+
 

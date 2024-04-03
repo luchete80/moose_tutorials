@@ -102,7 +102,7 @@ Extrude {0,0,thck} {Surface{1}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{2}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{3}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{4}; Layers{2};Recombine ;}
-Extrude {0,0,thck} {Surface{5}; Layers{2};Recombine ;}
+Extrude {0,0,thck} {Surface{5}; Layers{1};Recombine ;}
 
 /*//+*/
 Show "*";

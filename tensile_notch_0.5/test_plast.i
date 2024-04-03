@@ -2,34 +2,6 @@
   file = notch_0.5.inp
 []
 
-# This is where mesh adaptivity magic happens
-#[Adaptivity]
-#  steps = 1
-#  max_h_level = 3
-#  cycles_per_step = 1
-#  initial_marker = uniform
-#  marker = errorFraction
-#  [Markers]
-#    [uniform]
-#      type = UniformMarker
-#    []
-#    [errorFraction]
-#      mark = refine
-#      type = ErrorFractionMarker
-#      coarsen = 0.5
-#      indicator = gradientJump
-#      refine = 0.5
-#    []
-#  []
-#
-#  [Indicators]
-#    [gradientJump]
-#      type = GradientJumpIndicator
-#      variable = disp_y
-#    []
-#  []
-#[]
-
 [Variables]
   [./x_disp]
     order = FIRST
@@ -50,6 +22,34 @@
     displacements = 'x_disp y_disp z_disp'
     use_displaced_mesh = true
   [../]
+[]
+
+## This is where mesh adaptivity magic happens
+[Adaptivity]
+  steps = 1
+  max_h_level = 3
+  cycles_per_step = 1
+  initial_marker = uniform
+  marker = errorFraction
+  [Markers]
+    [uniform]
+      type = UniformMarker
+      mark = refine
+    []
+    [errorFraction]
+      type = ErrorFractionMarker
+      coarsen = 0.5
+      indicator = gradientJump
+      refine = 0.5
+    []
+  []
+
+  [Indicators]
+    [gradientJump]
+      type = GradientJumpIndicator
+      variable = x_disp
+    []
+  []
 []
 
 #[Physics/SolidMechanics/QuasiStatic]

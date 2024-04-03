@@ -2,4 +2,14 @@ https://chi-tech.github.io/d4/db9/_gmsh_example_01.html
 
 modules/solid_mechanics/test/tests/j2_plasticity/solid_mechanics_j2plasticity.i
 
+FROM
+https://mooseframework.inl.gov/getting_started/examples_and_tutorials/tutorial01_app_development/step07_parallel.html
 
+The mpiexec command is used to execute a MOOSE-based application using MPI. For example, the tutorial application can be executed with the following syntax, where the -n 4 is an argument supplied to the mpiexec command that indicates to use 4 processors for execution:
+
+cd ~/projects/babbler
+mpiexec -n 4 ./babbler-opt -i test/tests/kernels/simple_diffusion/simple_diffusion.iCopy
+In most cases, using MPI alone is the best coarse of action. If desired, threading may be enabled using the --n-threads option, which is supplied directly to the application executable. For example, the following runs the application with 4 threads:
+
+cd ~/projects/babbler
+./babbler-opt -i test/tests/kernels/simple_diffusion/simple_diffusion.i --n-threads=4

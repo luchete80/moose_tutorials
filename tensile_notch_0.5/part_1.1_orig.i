@@ -49,9 +49,9 @@
   [../]
   [./right]
     type = DirichletBC
-    variable = disp_x
+    variable = disp_y
     boundary = right
-    value = 0.001
+    value = 0.0
   [../]
 []
 

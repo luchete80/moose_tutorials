@@ -92,7 +92,7 @@ Extrude {0,0,thck} {Surface{4}; Layers{2};Recombine ;}
 Show "*";
 
 /*//+*/
-Physical Surface("left",    1) = {74,45};
+Physical Surface("left",    1) = {34,45};
 Physical Surface("bottom",  2) = {22,75};
 Physical Surface("back",    3) = {1,2,3,4};
 Physical Surface("right",   4) = {79,97};

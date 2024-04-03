@@ -93,7 +93,7 @@ Show "*";
 
 /*//+*/
 Physical Surface("left",    1) = {74,45};
-Physical Surface("bottom",  2) = {22};
+Physical Surface("bottom",  2) = {22,75};
 Physical Surface("back",    3) = {1,2,3,4};
 
 Physical Volume("vol1", 1) = {1};

@@ -47,6 +47,12 @@
     boundary = bottom
     value = 0.0
   [../]
+  [./right]
+    type = DirichletBC
+    variable = disp_x
+    boundary = right
+    value = 0.001
+  [../]
 []
 
 [Preconditioning]

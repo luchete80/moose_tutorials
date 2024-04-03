@@ -95,6 +95,7 @@ Show "*";
 Physical Surface("left",    1) = {74,45};
 Physical Surface("bottom",  2) = {22,75};
 Physical Surface("back",    3) = {1,2,3,4};
+Physical Surface("right",   4) = {79,97};
 
 Physical Volume("vol1", 1) = {1};
 Physical Volume("vol2", 2) = {2};

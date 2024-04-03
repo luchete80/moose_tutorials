@@ -33,6 +33,7 @@
   marker = errorFraction
   [Markers]
     [uniform]
+      #block = 1
       type = UniformMarker
       mark = refine
     []
@@ -117,7 +118,7 @@
     boundary = right
     #value = 0.0001
     #displacements = 'x_disp'
-    function = 't*1.0e-4'
+    function = 't*1.0e-3'
   [../]
 []
 
@@ -190,7 +191,7 @@
 [Executioner]
   type = Transient
 
-  dt=0.1
+  dt=0.01
   dtmax=1
   dtmin=1.0e-5
   end_time=1.0
@@ -202,4 +203,5 @@
 [Outputs]
   file_base = out
   exodus = true
+  #interval = 1
 []

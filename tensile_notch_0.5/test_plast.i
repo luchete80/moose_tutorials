@@ -116,10 +116,18 @@
     type = FunctionDirichletBC
     variable = x_disp
     boundary = right
-    #value = 0.0001
-    #displacements = 'x_disp'
-    function = 't*1.0e-3'
+    function = 't*10.0e-3'
   [../]
+
+#  [./right]
+#    type = DirichletBC
+#    variable = x_disp
+#    boundary = right
+#    #value = 0.0001
+#    #displacements = 'x_disp'
+#    function = 't*10.0e-3'
+#  [../]
+
 []
 
 [AuxVariables]
@@ -191,7 +199,7 @@
 [Executioner]
   type = Transient
 
-  dt=0.01
+  dt=0.001
   dtmax=1
   dtmin=1.0e-5
   end_time=1.0

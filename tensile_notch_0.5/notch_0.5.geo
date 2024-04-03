@@ -10,13 +10,13 @@ Point(5)  = {0.0,0.0125-0.0005,0.0,lc};
 Point(6)  = {0.0005,0.0125,0.0,lc};
 Point(7)  = {0.0 ,0.0125,0.0,lc};
 Point(8)  = {0.001 ,0.0125,0.0,lc};
+
 Point(9)  = {0.005, 0.0, 0.0, lc};
 Point(10) = {0.005, 0.0125, 0.0, lc};
-
 Point(11) = {0.005, 0.0125-0.001, 0.0, lc};
 
-//Point(11) = {0.05, 0.0, 0.0, lc};
-//Point(12) = {0.05, 0.0125, 0.0, lc};
+Point(12) = {0.05, 0.0, 0.0, lc};
+Point(13) = {0.05, 0.0125, 0.0, lc};
 
 // From https://chi-tech.github.io/d4/db9/_gmsh_example_01.html
 //The "Transfinite Line" command is used. This command specifies opposing faces of the four sided
@@ -49,7 +49,15 @@ Line(11)  = {11,10};
 Line(12)  = {10,8};
 Line(13)  = {11,4};
 
-Transfinite Line {9,11} = 10; //Top next to znotch
+Line(14) = {9,12};
+Line(15) = {12,13};
+Line(16) = {13,10};
+
+
+Transfinite Line {8} = 8;
+
+Transfinite Line {11} = 3;
+
 
 Transfinite Line {10} = 30; //As  2and 4, Top next to znotch
 
@@ -76,6 +84,13 @@ Transfinite Surface{3};
 Curve Loop(4) = {-13,11,12,8};
 Surface(4) = {4};
 
+
+Curve Loop(5) = {-11,-10,14,15,16};
+Plane Surface(5) = {5};
+
+Transfinite Line {14,16} = 40;
+Transfinite Line {15} = 10;
+
 //Transfinite Surface{3};
 
 //Transfinite Surface{3};
@@ -87,19 +102,21 @@ Extrude {0,0,thck} {Surface{1}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{2}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{3}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{4}; Layers{2};Recombine ;}
+Extrude {0,0,thck} {Surface{5}; Layers{2};Recombine ;}
 
 /*//+*/
 Show "*";
 
 /*//+*/
-Physical Surface("left",    1) = {34,45};
-Physical Surface("bottom",  2) = {22,75};
-Physical Surface("back",    3) = {1,2,3,4};
-Physical Surface("right",   4) = {79,97};
+Physical Surface("left",    1) = {37,48};
+Physical Surface("bottom",  2) = {25,78,127};
+Physical Surface("back",    3) = {1,2,3,4,5};
+Physical Surface("right",   4) = {131};
 
 Physical Volume("vol1", 1) = {1};
 Physical Volume("vol2", 2) = {2};
 Physical Volume("vol3", 3) = {3};
 Physical Volume("vol4", 4) = {4};
+Physical Volume("vol5", 5) = {5};
 //+
 

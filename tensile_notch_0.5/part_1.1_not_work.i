@@ -35,17 +35,23 @@
     boundary = left
     value = 0.0
   [../]
-  [./back]
-    type = DirichletBC
-    variable = disp_z
-    boundary = back
-    value = 0.0
-  [../]
   [./bottom]
     type = DirichletBC
     variable = disp_y
     boundary = bottom
     value = 0.0
+  [../]
+  [./back]
+    type = DirichletBC
+    variable = disp_z
+    boundary = bottom
+    value = 0.0
+  [../]
+  [./right]
+    type = DirichletBC
+    variable = disp_x
+    boundary = bottom
+    value = 1.0e-3
   [../]
 []
 

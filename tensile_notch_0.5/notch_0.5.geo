@@ -12,6 +12,9 @@ Point(7)  = {0.0 ,0.0125,0.0,lc};
 Point(8)  = {0.001 ,0.0125,0.0,lc};
 Point(9)  = {0.005, 0.0, 0.0, lc};
 Point(10) = {0.005, 0.0125, 0.0, lc};
+
+Point(11) = {0.005, 0.0125-0.001, 0.0, lc};
+
 //Point(11) = {0.05, 0.0, 0.0, lc};
 //Point(12) = {0.05, 0.0125, 0.0, lc};
 
@@ -30,7 +33,7 @@ Line(3)  = {4,3};
 Line(4)  = {3,1};
 
 Transfinite Line {1,3} = 10;
-Transfinite Line {2,4} = 20;
+Transfinite Line {2,4} = 30;
 
 Line(5)   = {3,5};
 Circle(6) = {5, 7, 6};
@@ -41,10 +44,18 @@ Transfinite Line {5,6,7,8} = 10;
 
 
 Line(9)   = {2,9};
-Line(10)  = {9,10};
-Line(11)  = {10,8};
+Line(10)  = {9,11};
+Line(11)  = {11,10};
+Line(12)  = {10,8};
+Line(13)  = {11,4};
 
-Transfinite Line {9,11} = 10; //Top next to notch
+Transfinite Line {9,11} = 10; //Top next to znotch
+
+Transfinite Line {10} = 30; //As  2and 4, Top next to znotch
+
+Transfinite Line {12,13,9} = 10; //bottom
+
+//Transfinite Line {12,13} = 10; //bottom
 
 Curve Loop(1) = {1,2,3,4};
 Surface(1) = {1};
@@ -54,31 +65,40 @@ Transfinite Surface{1};
 Curve Loop(2) = {5,6,7,8,3};
 Plane Surface(2) = {2};
 
-Curve Loop(3) = {9,10,11,8,-2};
-Plane Surface(3) = {3};
+//Transfinite Surface{2};
+
+//Curve Loop(3) = {9,10,11,12,8,-2};
+//Plane Surface(3) = {3};
+Curve Loop(3) = {-2,9,10,13};
+Surface(3) = {3};
+Transfinite Surface{3};
+
+Curve Loop(4) = {-13,11,12,8};
+Surface(4) = {4};
+
+//Transfinite Surface{3};
+
+//Transfinite Surface{3};
 
 Recombine Surface "*";
 
 
-Extrude {0,0,thck} {Surface{1}; Layers{2};}
-Extrude {0,0,thck} {Surface{2}; Layers{2};}
-Extrude {0,0,thck} {Surface{3}; Layers{2};}
+Extrude {0,0,thck} {Surface{1}; Layers{2};Recombine ;}
+Extrude {0,0,thck} {Surface{2}; Layers{2};Recombine ;}
+Extrude {0,0,thck} {Surface{3}; Layers{2};Recombine ;}
+Extrude {0,0,thck} {Surface{4}; Layers{2};Recombine ;}
 
-//+
+/*//+*/
 Show "*";
 
-//+
-Physical Surface("left",    1) = {32,43};
-Physical Surface("bottom",  2) = {70,20};
-Physical Surface("back",    3) = {87,33};
-Physical Surface("right",   4) = {74};
-//+
-Surface Loop(1) = {26, 13, 1, 17, 21, 25};
-//+
-//Volume(2) = {1};
-// HAS TO BE STABLISHED A VOLUME IN ORDER TO KEEP THE ELEMENTS
+/*//+*/
+Physical Surface("left",    1) = {74,45};
+Physical Surface("bottom",  2) = {22};
+Physical Surface("back",    3) = {1,2,3,4};
+
 Physical Volume("vol1", 1) = {1};
 Physical Volume("vol2", 2) = {2};
 Physical Volume("vol3", 3) = {3};
+Physical Volume("vol4", 4) = {4};
 //+
 

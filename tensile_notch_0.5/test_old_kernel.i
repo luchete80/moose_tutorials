@@ -19,9 +19,9 @@
 []
 
 #### NEW KERNEL ###########3
-#[GlobalParams]
-#  displacements = 'x_disp y_disp z_disp'
-#[]
+[GlobalParams]
+  displacements = 'x_disp y_disp z_disp'
+[]
 #
 #[Physics]
 #  [SolidMechanics]
@@ -37,10 +37,12 @@
 
 [Kernels]
   [SolidMechanics]
+    incremental = true
     strain = FINITE
     displacements = 'x_disp y_disp z_disp'
     use_displaced_mesh = true
     use_finite_deform_jacobian = true
+    #formulation = UPDATED #NOT ALLOWED IN OLD KERNEL
   [../]
 []
 
@@ -170,14 +172,6 @@
 []
 
 [AuxKernels]
-  [./von_mises_kernel]
-    #Calculates the von mises stress and assigns it to von_mises
-    type = RankTwoScalarAux
-    variable = von_mises
-    rank_two_tensor = stress
-    execute_on = timestep_end
-    scalar_type = VonMisesStress
-  [../]
   
   [./stress_zz]
     type = RankTwoAux
@@ -226,7 +220,7 @@
 
   #type = Steady
   
-  dt=0.01
+  dt=0.05
   dtmax=0.001
   dtmin=1.0e-10
 

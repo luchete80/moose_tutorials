@@ -259,8 +259,8 @@
 [Executioner]
   type = Transient
 
-  dt=0.01
-  dtmax=1
+  dt=0.001
+  dtmax=0.1
   dtmin=1.0e-10
   end_time=1.0
 

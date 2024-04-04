@@ -2,6 +2,57 @@
   file = notch_0.5.inp
 []
 
+[GlobalParams]
+  displacements = 'x_disp y_disp z_disp'
+  large_kinematics = true
+[]
+
+
+[Physics/SolidMechanics/QuasiStatic]
+  [./all]
+  #displacements = 'x_disp y_disp z_disp'
+  new_system = true
+  #incremental = true
+  add_variables = true
+  strain = FINITE #Small linearized strain, automatically set to XY coordinates
+  formulation = UPDATED
+  volumetric_locking_correction = false
+  #generate_output = 'vonmises_stress cauchy_stress_xx cauchy_stress_yy cauchy_stress_zz cauchy_stress_xy cauchy_stress_xz cauchy_stress_yz strain_xx strain_yy strain_zz strain_xy strain_xz strain_yz'
+
+  [../]
+[]
+
+[Materials]
+  #[./fplastic]
+  #  type = FiniteStrainPlasticMaterial
+    #block=0
+    #yield_stress='0. 445.e6 0.05 610.e6 0.1 680.e6 0.38 810.e6 0.95 920.0e6 2. 950.0e6'
+  #  yield_stress='0. 270.e6 0.05 300.e6 0.1 310.e6 0.95 310.0e6 2. 310.0e6'
+  #[../]
+  [stress]
+      type = FiniteStrainPlasticMaterial
+      yield_stress = '0 0.2e-6 0.8 0.2e-6'
+  []
+  #[./elasticity_tensor]
+  #  type = ComputeElasticityTensor
+    ##block = 0
+  #  C_ijkl = '2.827e5 1.21e5 1.21e5 2.827e5 1.21e5 2.827e5 0.808e5 0.808e5 0.808e5'
+  #  fill_method = symmetric9
+  #[../]
+
+  [./elasticity_tensor]
+    type = ComputeIsotropicElasticityTensor
+    youngs_modulus = 210.0e9
+    poissons_ratio = 0.3
+  [../]
+  [./strain]
+    type = ComputeFiniteStrain
+    #block = 
+    displacements = 'x_disp y_disp z_disp'
+  [../]
+
+[]
+
 [Variables]
   [./x_disp]
     order = FIRST
@@ -17,12 +68,8 @@
   [../]
 []
 
-[Kernels]
-  [SolidMechanics]
-    displacements = 'x_disp y_disp z_disp'
-    use_displaced_mesh = true
-  [../]
-[]
+
+
 
 ## This is where mesh adaptivity magic happens
 [Adaptivity]
@@ -53,38 +100,6 @@
   []
 []
 
-#[Physics/SolidMechanics/QuasiStatic]
-  #[./block1]
-  #displacements = 'x_disp y_disp z_disp'
-  #strain = SMALL #Small linearized strain, automatically set to XY coordinates
-  #add_variables = true #Add the variables from the displacement string in GlobalParams
-  #[../]
-#[]
-
-[Materials]
-  [./fplastic]
-    type = FiniteStrainPlasticMaterial
-    #block=0
-    #yield_stress='0. 445.e6 0.05 610.e6 0.1 680.e6 0.38 810.e6 0.95 920.0e6 2. 950.0e6'
-    yield_stress='0. 270.e6 0.05 300.e6 0.1 310.e6 0.95 310.0e6 2. 310.0e6'
-  [../]
-  #[./elasticity_tensor]
-  #  type = ComputeElasticityTensor
-    ##block = 0
-  #  C_ijkl = '2.827e5 1.21e5 1.21e5 2.827e5 1.21e5 2.827e5 0.808e5 0.808e5 0.808e5'
-  #  fill_method = symmetric9
-  #[../]
-  [./elasticity_tensor]
-    type = ComputeIsotropicElasticityTensor
-    youngs_modulus = 210.0e9
-    poissons_ratio = 0.3
-  [../]
-  [./strain]
-    type = ComputeFiniteStrain
-    #block = 0
-    displacements = 'x_disp y_disp z_disp'
-  [../]
-[]
 
 [Functions]
   [./topfunc]
@@ -131,62 +146,62 @@
 []
 
 [AuxVariables]
-  [./stress_zz]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./peeq]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./pe11]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./pe22]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
-  [./pe33]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
+ [./stress_zz]
+   order = CONSTANT
+   family = MONOMIAL
+ [../]
+ [./peeq]
+   order = CONSTANT
+   family = MONOMIAL
+ [../]
+ [./pe11]
+   order = CONSTANT
+   family = MONOMIAL
+ [../]
+ [./pe22]
+   order = CONSTANT
+   family = MONOMIAL
+ [../]
+ [./pe33]
+   order = CONSTANT
+   family = MONOMIAL
+ [../]
 []
 
 [AuxKernels]
-  [./stress_zz]
-    type = RankTwoAux
-    rank_two_tensor = stress
-    variable = stress_zz
-    index_i = 2
-    index_j = 2
-  [../]
-  [./pe11]
-    type = RankTwoAux
-    rank_two_tensor = plastic_strain
-    variable = pe11
-    index_i = 0
-    index_j = 0
-  [../]
-    [./pe22]
-    type = RankTwoAux
-    rank_two_tensor = plastic_strain
-    variable = pe22
-    index_i = 1
-    index_j = 1
-  [../]
-  [./pe33]
-    type = RankTwoAux
-    rank_two_tensor = plastic_strain
-    variable = pe33
-    index_i = 2
-    index_j = 2
-  [../]
-  [./eqv_plastic_strain]
-    type = MaterialRealAux
-    property = eqv_plastic_strain
-    variable = peeq
-  [../]
+ [./stress_zz]
+   type = RankTwoAux
+   rank_two_tensor = stress
+   variable = stress_zz
+   index_i = 2
+   index_j = 2
+ [../]
+ [./pe11]
+   type = RankTwoAux
+   rank_two_tensor = plastic_strain
+   variable = pe11
+   index_i = 0
+   index_j = 0
+ [../]
+   [./pe22]
+   type = RankTwoAux
+   rank_two_tensor = plastic_strain
+   variable = pe22
+   index_i = 1
+   index_j = 1
+ [../]
+ [./pe33]
+   type = RankTwoAux
+   rank_two_tensor = plastic_strain
+   variable = pe33
+   index_i = 2
+   index_j = 2
+ [../]
+ [./eqv_plastic_strain]
+   type = MaterialRealAux
+   property = eqv_plastic_strain
+   variable = peeq
+ [../]
 []
 
 [Preconditioning]

@@ -13,3 +13,5 @@ In most cases, using MPI alone is the best coarse of action. If desired, threadi
 
 cd ~/projects/babbler
 ./babbler-opt -i test/tests/kernels/simple_diffusion/simple_diffusion.i --n-threads=4
+
+modules/solid_mechanics

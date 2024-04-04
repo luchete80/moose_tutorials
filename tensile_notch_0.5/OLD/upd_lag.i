@@ -261,7 +261,7 @@
 
   dt=0.01
   dtmax=1
-  dtmin=1.0e-5
+  dtmin=1.0e-10
   end_time=1.0
 
   solve_type = 'newton'

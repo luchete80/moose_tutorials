@@ -43,6 +43,14 @@
     use_finite_deform_jacobian = true
   [../]
 []
+
+[Adaptivity]
+  interval = 2
+  # refine_fraction = 0.2
+  # coarsen_fraction = 0.3
+  max_h_level = 1
+[]
+
 ## This is where mesh adaptivity magic happens
 #[Adaptivity]
 #  steps = 1
@@ -162,6 +170,15 @@
 []
 
 [AuxKernels]
+  [./von_mises_kernel]
+    #Calculates the von mises stress and assigns it to von_mises
+    type = RankTwoScalarAux
+    variable = von_mises
+    rank_two_tensor = stress
+    execute_on = timestep_end
+    scalar_type = VonMisesStress
+  [../]
+  
   [./stress_zz]
     type = RankTwoAux
     rank_two_tensor = stress
@@ -207,13 +224,15 @@
 [Executioner]
   type = Transient
 
+  #type = Steady
+  
   dt=0.01
-  dtmax=0.01
-  dtmin=0.0001
+  dtmax=0.001
+  dtmin=1.0e-10
 
   end_time=1.0
-  nl_rel_tol = 1e-4
-  nl_abs_tol = 1e-4
+  nl_rel_tol = 1e-2
+  nl_abs_tol = 1e-2
 []
 
 

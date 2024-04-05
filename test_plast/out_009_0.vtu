@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<VTKFile type="UnstructuredGrid" version="0.1" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <UnstructuredGrid>
+    <Piece NumberOfPoints="8" NumberOfCells="1">
+      <PointData>
+        <DataArray type="Int32" Name="libmesh_node_id" format="ascii" RangeMin="0" RangeMax="7">
+          0 1 2 3 4 5
+          6 7
+        </DataArray>
+        <DataArray type="Float64" Name="stress_zz" format="ascii" RangeMin="848.5406759886818" RangeMax="848.5406759886818">
+          848.5406759886818 848.5406759886818 848.5406759886818 848.5406759886818 848.5406759886818 848.5406759886818
+          848.5406759886818 848.5406759886818
+        </DataArray>
+        <DataArray type="Float64" Name="peeq" format="ascii" RangeMin="0.633531262386129" RangeMax="0.633531262386129">
+          0.633531262386129 0.633531262386129 0.633531262386129 0.633531262386129 0.633531262386129 0.633531262386129
+          0.633531262386129 0.633531262386129
+        </DataArray>
+        <DataArray type="Float64" Name="pe11" format="ascii" RangeMin="-0.3167656311930643" RangeMax="-0.3167656311930643">
+          -0.3167656311930643 -0.3167656311930643 -0.3167656311930643 -0.3167656311930643 -0.3167656311930643 -0.3167656311930643
+          -0.3167656311930643 -0.3167656311930643
+        </DataArray>
+        <DataArray type="Float64" Name="pe22" format="ascii" RangeMin="-0.3167656311930646" RangeMax="-0.3167656311930646">
+          -0.3167656311930646 -0.3167656311930646 -0.3167656311930646 -0.3167656311930646 -0.3167656311930646 -0.3167656311930646
+          -0.3167656311930646 -0.3167656311930646
+        </DataArray>
+        <DataArray type="Float64" Name="pe33" format="ascii" RangeMin="0.633531262386129" RangeMax="0.633531262386129">
+          0.633531262386129 0.633531262386129 0.633531262386129 0.633531262386129 0.633531262386129 0.633531262386129
+          0.633531262386129 0.633531262386129
+        </DataArray>
+        <DataArray type="Float64" Name="x_disp" format="ascii" RangeMin="-0.27283148081994324" RangeMax="1.1160754586319395e-15">
+          0 -0.27283148081994324 -0.2728314808199431 1.1160754586319395e-15 1.9583260061007632e-16 -0.2728314808199432
+          -0.2728314808199426 7.039317221164952e-16
+        </DataArray>
+        <DataArray type="Float64" Name="y_disp" format="ascii" RangeMin="-0.2728314808199443" RangeMax="2.9784076605267e-17">
+          0 0 -0.2728314808199443 -0.2728314808199432 2.9784076605267e-17 -3.425095868950992e-16
+          -0.2728314808199442 -0.27283148081994313
+        </DataArray>
+        <DataArray type="Float64" Name="z_disp" format="ascii" RangeMin="0" RangeMax="0.8999999999999999">
+          0 0 0 0 0.8999999999999999 0.8999999999999999
+          0.8999999999999999 0.8999999999999999
+        </DataArray>
+      </PointData>
+      <CellData>
+        <DataArray type="Int32" Name="libmesh_elem_id" format="ascii" RangeMin="0" RangeMax="0">
+          0
+        </DataArray>
+        <DataArray type="Int32" Name="subdomain_id" format="ascii" RangeMin="0" RangeMax="0">
+          0
+        </DataArray>
+        <DataArray type="Int32" Name="processor_id" format="ascii" RangeMin="0" RangeMax="0">
+          0
+        </DataArray>
+      </CellData>
+      <Points>
+        <DataArray type="Float64" Name="Points" NumberOfComponents="3" format="ascii" RangeMin="0" RangeMax="1.7320508075688772">
+          0 0 0 1 0 0
+          1 1 0 0 1 0
+          0 0 1 1 0 1
+          1 1 1 0 1 1
+          <InformationKey name="L2_NORM_RANGE" location="vtkDataArray" length="2">
+            <Value index="0">
+              0
+            </Value>
+            <Value index="1">
+              1.7320508076
+            </Value>
+          </InformationKey>
+        </DataArray>
+      </Points>
+      <Cells>
+        <DataArray type="Int64" Name="connectivity" format="ascii" RangeMin="0" RangeMax="7">
+          0 1 2 3 4 5
+          6 7
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="ascii" RangeMin="8" RangeMax="8">
+          8
+        </DataArray>
+        <DataArray type="UInt8" Name="types" format="ascii" RangeMin="12" RangeMax="12">
+          12
+        </DataArray>
+      </Cells>
+    </Piece>
+  </UnstructuredGrid>
+</VTKFile>

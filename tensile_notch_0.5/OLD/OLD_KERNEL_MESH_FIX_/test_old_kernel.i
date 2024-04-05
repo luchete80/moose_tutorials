@@ -1,31 +1,6 @@
 [Mesh]
   displacements = 'x_disp y_disp z_disp'
-  [generated_mesh]
-    type = GeneratedMeshGenerator
-    elem_type = HEX8
-    dim = 3
-    nx = 1
-    ny = 1
-    nz = 1
-    xmin = 0.0
-    xmax = 1.0
-    ymin = 0.0
-    ymax = 1.0
-    zmin = 0.0
-    zmax = 1.0
-  []
-  [cnode]
-    type = ExtraNodesetGenerator
-    coord = '0.0 0.0 0.0'
-    new_boundary = 6
-    input = generated_mesh
-  []
-  [snode]
-    type = ExtraNodesetGenerator
-    coord = '1.0 0.0 0.0'
-    new_boundary = 7
-    input = cnode
-  []
+  file = notch_0.5.inp
 []
 
 [Variables]
@@ -43,29 +18,90 @@
   [../]
 []
 
+#### NEW KERNEL ###########3
+[GlobalParams]
+  displacements = 'x_disp y_disp z_disp'
+[]
+#
+#[Physics]
+#  [SolidMechanics]
+#    [QuasiStatic]
+#      [./all]
+#        strain = FINITE
+#        add_variables = true
+#      [../]
+#    [../]
+#  [../]
+#[]
+############################
+
 [Kernels]
   [SolidMechanics]
+    incremental = true
+    strain = FINITE
     displacements = 'x_disp y_disp z_disp'
     use_displaced_mesh = true
+    use_finite_deform_jacobian = true
+    #formulation = UPDATED #NOT ALLOWED IN OLD KERNEL
   [../]
 []
+
+[Adaptivity]
+  interval = 2
+  # refine_fraction = 0.2
+  # coarsen_fraction = 0.3
+  max_h_level = 1
+[]
+
+## This is where mesh adaptivity magic happens
+#[Adaptivity]
+#  steps = 1
+#  max_h_level = 3
+#  cycles_per_step = 1
+#  initial_marker = uniform
+#  marker = errorFraction
+#  [Markers]
+#    [uniform]
+#      #block = 1
+#      type = UniformMarker
+#      mark = refine
+#    []
+#    [errorFraction]
+#      type = ErrorFractionMarker
+#      coarsen = 0.5
+#      indicator = gradientJump
+#      refine = 0.5
+#    []
+#  []
+#
+#  [Indicators]
+#    [gradientJump]
+#      type = GradientJumpIndicator
+#      variable = x_disp
+#    []
+#  []
+#[]
 
 [Materials]
   [./fplastic]
     type = FiniteStrainPlasticMaterial
-    block=0
-    yield_stress='0. 445. 0.05 610. 0.1 680. 0.38 810. 0.95 920. 2. 950.'
+    yield_stress='0. 300.e6 0.05 310.e6 0.1 310.e6 0.38 320.e6 0.95 320.e6 2.0 320.e6 10.0 321.0e6'
+
   [../]
-  [./elasticity_tensor]
-    type = ComputeElasticityTensor
-    block = 0
-    C_ijkl = '2.827e5 1.21e5 1.21e5 2.827e5 1.21e5 2.827e5 0.808e5 0.808e5 0.808e5'
-    fill_method = symmetric9
-  [../]
+  #[./elasticity_tensor]
+  #  type = ComputeElasticityTensor
+  #  C_ijkl = '2.827e5 1.21e5 1.21e5 2.827e5 1.21e5 2.827e5 0.808e5 0.808e5 0.808e5'
+  #  fill_method = symmetric9
+  #[../]
+    [elastic_tensor]
+    type = ComputeIsotropicElasticityTensor
+    youngs_modulus = 210.0e9
+    poissons_ratio = 0.3
+  []
   [./strain]
     type = ComputeFiniteStrain
-    block = 0
     displacements = 'x_disp y_disp z_disp'
+
   [../]
 []
 
@@ -77,48 +113,39 @@
 []
 
 [BCs]
-  [./bottom3]
-    type = DirichletBC
-    variable = z_disp
-    boundary = 0
-    value = 0.0
-  [../]
-  [./top]
-    type = FunctionDirichletBC
-    variable = z_disp
-    boundary = 5
-    function = topfunc
-  [../]
-  [./corner1]
+  [./left]
     type = DirichletBC
     variable = x_disp
-    boundary = 6
+    boundary = left
     value = 0.0
   [../]
-  [./corner2]
-    type = DirichletBC
-    variable = y_disp
-    boundary = 6
-    value = 0.0
-  [../]
-  [./corner3]
+  [./back]
     type = DirichletBC
     variable = z_disp
-    boundary = 6
+    boundary = back
     value = 0.0
   [../]
-  [./side1]
+  [./bottom]
     type = DirichletBC
     variable = y_disp
-    boundary = 7
+    boundary = bottom
     value = 0.0
   [../]
-  [./side2]
-    type = DirichletBC
-    variable = z_disp
-    boundary = 7
-    value = 0.0
+  [./right]
+    type = FunctionDirichletBC
+    variable = x_disp
+    boundary = right
+    function = 't*10.0e-3'
   [../]
+
+#  [./right]
+#    type = DirichletBC
+#    variable = x_disp
+#    boundary = right
+#    #value = 0.0001
+#    #displacements = 'x_disp'
+#    function = 't*10.0e-3'
+#  [../]
 []
 
 [AuxVariables]
@@ -145,6 +172,7 @@
 []
 
 [AuxKernels]
+  
   [./stress_zz]
     type = RankTwoAux
     rank_two_tensor = stress
@@ -190,12 +218,15 @@
 [Executioner]
   type = Transient
 
-  dt=0.1
-  dtmax=1
-  dtmin=0.1
-  end_time=1.0
+  #type = Steady
+  
+  dt=0.01
+  dtmax=0.001
+  dtmin=1.0e-10
 
-  nl_abs_tol = 1e-10
+  end_time=1.0
+  nl_rel_tol = 1e-2
+  nl_abs_tol = 1e-2
 []
 
 

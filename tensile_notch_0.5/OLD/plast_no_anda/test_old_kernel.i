@@ -40,6 +40,7 @@
     incremental = true
     strain = FINITE
     displacements = 'x_disp y_disp z_disp'
+    large_kinematics = true
     use_displaced_mesh = true
     use_finite_deform_jacobian = true
     #formulation = UPDATED #NOT ALLOWED IN OLD KERNEL
@@ -85,7 +86,7 @@
 [Materials]
   [./fplastic]
     type = FiniteStrainPlasticMaterial
-    yield_stress='0. 300.e6 0.05 310.e6 0.1 310.e6 0.38 320.e6 0.95 320.e6 2.0 320.e6'
+    yield_stress='0. 300.e6 0.05 310.e6 0.1 310.e6 0.38 320.e6 0.95 320.e6 2.0 320.e6 10.0 321.0e6'
 
   [../]
   #[./elasticity_tensor]
@@ -220,7 +221,7 @@
 
   #type = Steady
   
-  dt=0.05
+  dt=0.01
   dtmax=0.001
   dtmin=1.0e-10
 
@@ -233,4 +234,5 @@
 [Outputs]
   file_base = out
   exodus = true
+  vtk = true
 []

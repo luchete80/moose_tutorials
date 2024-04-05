@@ -21,3 +21,5 @@ modules/solid_mechanics
 How to obtain Residual Forces 
 
 https://github.com/idaholab/moose/discussions/26807
+
+LARGE DIP

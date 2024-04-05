@@ -19,12 +19,12 @@
 
 [Adaptivity]
   interval = 2
-  # refine_fraction = 0.2
-  # coarsen_fraction = 0.3
-  max_h_level = 1
+#refine_fraction = 0.2
+#coarsen_fraction = 0.3
+  max_h_level = 3
 []
 
-## This is where mesh adaptivity magic happens
+# This is where mesh adaptivity magic happens
 #[Adaptivity]
 #  steps = 1
 #  max_h_level = 3
@@ -48,7 +48,7 @@
 #  [Indicators]
 #    [gradientJump]
 #      type = GradientJumpIndicator
-#      variable = x_disp
+#      variable = disp_x
 #    []
 #  []
 #[]
@@ -197,12 +197,12 @@
 
   dtmax = 0.1
 
-  end_time = 1
-  dtmin = 0.001
+  end_time = 20.
+  dtmin = 1.0e-6
   #num_steps = 10
-  nl_abs_step_tol = 1e-3
-  nl_rel_step_tol = 1e-3
-  nl_rel_tol = 1e-3
+  nl_abs_step_tol = 1e-2
+  nl_rel_step_tol = 1e-2
+  nl_rel_tol = 1e-4
 []
 
 [Outputs]

@@ -16,6 +16,44 @@
   [../]
 []
 
+
+[Adaptivity]
+  interval = 2
+  # refine_fraction = 0.2
+  # coarsen_fraction = 0.3
+  max_h_level = 1
+[]
+
+## This is where mesh adaptivity magic happens
+#[Adaptivity]
+#  steps = 1
+#  max_h_level = 3
+#  cycles_per_step = 1
+#  initial_marker = uniform
+#  marker = errorFraction
+#  [Markers]
+#    [uniform]
+#      #block = 1
+#      type = UniformMarker
+#      mark = refine
+#    []
+#    [errorFraction]
+#      type = ErrorFractionMarker
+#      coarsen = 0.5
+#      indicator = gradientJump
+#      refine = 0.5
+#    []
+#  []
+#
+#  [Indicators]
+#    [gradientJump]
+#      type = GradientJumpIndicator
+#      variable = x_disp
+#    []
+#  []
+#[]
+
+
 [Physics]
   [SolidMechanics]
     [QuasiStatic]
@@ -61,7 +99,7 @@
 [Materials]
   [fplastic]
       type = FiniteStrainPlasticMaterial
-      yield_stress = '0 270.e6 2.0 320.e6'
+      yield_stress = '0 270.e6 0.5 280.e6 1.0 300.e6 2.0 320.e6'
   []
   #[./elasticity_tensor]
   #  type = ComputeElasticityTensor
@@ -157,14 +195,14 @@
   petsc_options_iname = -pc_hypre_type
   petsc_options_value = boomeramg
 
-  dtmax = 10.0
+  dtmax = 0.1
 
   end_time = 1
   dtmin = 0.001
   #num_steps = 10
-  nl_abs_step_tol = 1e-2
-  nl_rel_step_tol = 1e-2
-  nl_rel_tol = 1e-2
+  nl_abs_step_tol = 1e-3
+  nl_rel_step_tol = 1e-3
+  nl_rel_tol = 1e-3
 []
 
 [Outputs]

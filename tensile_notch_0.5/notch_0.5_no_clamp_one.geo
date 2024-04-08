@@ -2,47 +2,23 @@
 lc = 1.0e-3;
 ld = 0.5e-3;
 thck = 3.0e-4;
-R2 = 0.025;
-rn = 5.0e-4;
-h1 = 0.0125;
-h2 = 0.0175;
-hend = 0.01;
-lcal = 0.025; //calibrated length
-lth1 = 0.03; //Total length of narrow section
-
 Point(1)  = {0.0,0.0   ,0.0,lc}; 
 Point(2)  = {0.001,0.0   ,0.0,lc}; 
-Point(3)  = {0.0,  h1-rn,0.0,lc};
-Point(4)  = {0.001,h1-rn,0.0,lc};
-Point(5)  = {0.0,h1,0.0,lc};
-Point(6)  = {rn, h1+rn,0.0,lc};
-Point(7)  = {0.0 ,  h1+rn,0.0,lc};
-Point(8)  = {0.001 ,h1+rn,0.0,lc};
+Point(3)  = {0.0,  0.0125-0.001,0.0,lc};
+Point(4)  = {0.001,0.0125-0.001,0.0,lc};
+Point(5)  = {0.0,0.0125-0.0005,0.0,lc};
+Point(6)  = {0.0005,0.0125,0.0,lc};
+Point(7)  = {0.0 ,0.0125,0.0,lc};
+Point(8)  = {0.001 ,0.0125,0.0,lc};
 
 Point(9)  = {0.005, 0.0, 0.0, lc};
-Point(10) = {0.005, h1+rn, 0.0, lc};
-Point(11) = {0.005, h1-rn, 0.0, lc};
+Point(10) = {0.005, 0.0125, 0.0, lc};
+Point(11) = {0.005, 0.0125-0.001, 0.0, lc};
 
-Point(12) = {lcal, 0.0, 0.0, lc};
-Point(13) = {lcal, h1+rn, 0.0, lc};
-
-Point(14) = {lth1, 0.0,   0.0, lc};
-Point(15) = {lth1, h1 + rn,     0.0, lc};
-Point(16) = {lth1, h1 + rn + R2,0.0, lc};
+Point(12) = {0.05, 0.0, 0.0, lc};
+Point(13) = {0.05, 0.0125, 0.0, lc};
 
 
-
-a2 = Acos ((h1 + rn + R2-h2)/R2); //Angle of the curve of probe clam area
-test = (h1 + rn + R2-h2);
-
-Printf("angle: %f ", a2);
-Printf("test: %f",test);
-
-Point(17) = {lth1+ R2*Sin(a2) , 0.0, 0.0, lc};
-Point(18) = {lth1+ R2*Sin(a2) , h2,0.0};
-
-Point(19) = {lth1+ R2*Sin(a2)+hend, 0.0,0.0,lc};
-Point(20) = {lth1+ R2*Sin(a2)+hend, h2,0.0,lc};
 
 // From https://chi-tech.github.io/d4/db9/_gmsh_example_01.html
 //The "Transfinite Line" command is used. This command specifies opposing faces of the four sided
@@ -79,18 +55,6 @@ Line(14) = {9,12};
 Line(15) = {12,13};
 Line(16) = {13,10};
 
-//calibrated zone
-
-Circle(17) = {15, 16, 18}; //Clamp Zone
-Line(18) = {12,14};
-Line(19) = {14,15};
-Line(20) = {15,13};
-Line(21) = {14,17};
-Line(22) = {17,18};
-
-Line(23) = {17,19};
-Line(24) = {18,20};
-Line(25) = {19,20};
 
 Transfinite Line {8} = 8;
 
@@ -127,27 +91,11 @@ Curve Loop(5) = {-11,-10,14,15,16};
 Plane Surface(5) = {5};
 
 Transfinite Line {14,16} = 40;
-Transfinite Line {15,19} = 10;
+Transfinite Line {15} = 10;
 
-Transfinite Line {18,20} = 4;
-Curve Loop(6) = {-15,18,19,20};
-Plane Surface(6) = {6};
+//Transfinite Surface{3};
 
-Transfinite Line {15,19,22,25} = 10;
-Transfinite Line {17,21} = 10;
-
-Transfinite Line {23,24} = 10; //Horizontal, clamp area
-
-Transfinite Line {23,24} = 10; //Vertical, clamp area
-
-
-Curve Loop(7) = {-19,21,22,-17};
-Plane Surface(7) = {7};
-
-Curve Loop(8) = {23,25,-24,-22};
-Plane Surface(8) = {8};
-
-Transfinite Surface{6,7,8};
+//Transfinite Surface{3};
 
 Recombine Surface "*";
 
@@ -157,23 +105,20 @@ Extrude {0,0,thck} {Surface{2}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{3}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{4}; Layers{2};Recombine ;}
 Extrude {0,0,thck} {Surface{5}; Layers{2};Recombine ;}
-Extrude {0,0,thck} {Surface{6}; Layers{2};Recombine ;}
-Extrude {0,0,thck} {Surface{7}; Layers{2};Recombine ;}
-Extrude {0,0,thck} {Surface{8}; Layers{2};Recombine ;}
-
-// /*//+*/
-// Show "*";
 
 /*//+*/
-Physical Surface("left",    1) = {46,57};
-Physical Surface("bottom",  2) = {34,87,136,158,180,198};
-Physical Surface("back",    3) = {1,2,3,4,5,6,7,8};
-Physical Surface("right",   4) = {202};
+Show "*";
 
-// Physical Volume("vol1", 1) = {1};
-// Physical Volume("vol2", 2) = {2};
-// Physical Volume("vol3", 3) = {3};
-// Physical Volume("vol4", 4) = {4};
-// Physical Volume("vol5", 5) = {5};
+/*//+*/
+Physical Surface("left",    1) = {37,48};
+Physical Surface("bottom",  2) = {25,78,127};
+Physical Surface("back",    3) = {1,2,3,4,5};
+Physical Surface("right",   4) = {131};
+
+Physical Volume("vol1", 1) = {1};
+Physical Volume("vol2", 2) = {2};
+Physical Volume("vol3", 3) = {3};
+Physical Volume("vol4", 4) = {4};
+Physical Volume("vol5", 5) = {5};
 //+
 

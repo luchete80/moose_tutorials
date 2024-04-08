@@ -170,10 +170,13 @@ Physical Surface("bottom",  2) = {34,87,136,158,180,198};
 Physical Surface("back",    3) = {1,2,3,4,5,6,7,8};
 Physical Surface("right",   4) = {202};
 
-// Physical Volume("vol1", 1) = {1};
-// Physical Volume("vol2", 2) = {2};
-// Physical Volume("vol3", 3) = {3};
-// Physical Volume("vol4", 4) = {4};
-// Physical Volume("vol5", 5) = {5};
+Physical Volume("vol1", 1) = {1};
+Physical Volume("vol2", 2) = {2};
+Physical Volume("vol3", 3) = {3};
+Physical Volume("vol4", 4) = {4};
+Physical Volume("vol5", 5) = {5};
+Physical Volume("vol6", 6) = {6};
+Physical Volume("vol7", 7) = {7};
+Physical Volume("vol8", 8) = {8};
 //+
 

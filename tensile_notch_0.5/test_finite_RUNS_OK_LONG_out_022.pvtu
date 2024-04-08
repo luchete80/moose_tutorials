@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<VTKFile type="PUnstructuredGrid" version="0.1" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <PUnstructuredGrid GhostLevel="1">
+    <PPointData>
+      <PDataArray type="Int32" Name="libmesh_node_id"/>
+      <PDataArray type="Float64" Name="resid_x"/>
+      <PDataArray type="Float64" Name="resid_y"/>
+      <PDataArray type="Float64" Name="resid_z"/>
+      <PDataArray type="Float64" Name="stress_zz"/>
+      <PDataArray type="Float64" Name="peeq"/>
+      <PDataArray type="Float64" Name="pe11"/>
+      <PDataArray type="Float64" Name="pe22"/>
+      <PDataArray type="Float64" Name="pe33"/>
+      <PDataArray type="Float64" Name="disp_x"/>
+      <PDataArray type="Float64" Name="disp_y"/>
+      <PDataArray type="Float64" Name="disp_z"/>
+    </PPointData>
+    <PCellData>
+      <PDataArray type="Int32" Name="libmesh_elem_id"/>
+      <PDataArray type="Int32" Name="subdomain_id"/>
+      <PDataArray type="Int32" Name="processor_id"/>
+    </PCellData>
+    <PPoints>
+      <PDataArray type="Float64" Name="Points" NumberOfComponents="3"/>
+    </PPoints>
+    <Piece Source="test_finite_RUNS_OK_LONG_out_022_0.vtu"/>
+    <Piece Source="test_finite_RUNS_OK_LONG_out_022_1.vtu"/>
+    <Piece Source="test_finite_RUNS_OK_LONG_out_022_2.vtu"/>
+    <Piece Source="test_finite_RUNS_OK_LONG_out_022_3.vtu"/>
+    <Piece Source="test_finite_RUNS_OK_LONG_out_022_4.vtu"/>
+    <Piece Source="test_finite_RUNS_OK_LONG_out_022_5.vtu"/>
+    <Piece Source="test_finite_RUNS_OK_LONG_out_022_6.vtu"/>
+    <Piece Source="test_finite_RUNS_OK_LONG_out_022_7.vtu"/>
+  </PUnstructuredGrid>
+</VTKFile>

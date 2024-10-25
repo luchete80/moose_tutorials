@@ -53,6 +53,15 @@
 #  []
 #[]
 
+[Variables]
+  # temperature field variable
+  [T]
+    # initialize to an average temperature
+    initial_condition = 50
+    order = FIRST
+    family = LAGRANGE
+  []
+[]
 
 [Physics]
   [SolidMechanics]
@@ -122,6 +131,16 @@
 #  [./stress]
 #    type = ComputeFiniteStrainElasticStress
 #  [../]
+  # thermal properties
+  [thermal_conductivity]
+    type = HeatConductionMaterial
+    thermal_conductivity = 100
+    specific_heat = 1
+  []
+  [density]
+    type = Density
+    density = 1
+  []
 []
 
 #[NodalKernels]
@@ -179,8 +198,15 @@
     variable =disp_x
     save_in = 'resid_x'
   [../]
+  [heat_conduction]
+    type = HeatConduction
+    variable = T
+  []
+  [dTdt]
+    type = HeatConductionTimeDerivative
+    variable = T
+  []
 []
-
 
 [AuxKernels]
   

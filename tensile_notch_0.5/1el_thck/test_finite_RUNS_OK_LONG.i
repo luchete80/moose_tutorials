@@ -18,7 +18,8 @@
 
 
 [Adaptivity]
-  interval = 2
+  interval = 1
+  steps = 1
 #refine_fraction = 0.2
 #coarsen_fraction = 0.3
   max_h_level = 3
@@ -237,7 +238,12 @@
 
 [Executioner]
   type = Transient
-  dt = 0.001
+  #dt = 0.1
+
+ [./TimeStepper]
+    type = SolutionTimeAdaptiveDT
+    dt = 0.01
+  [../]
 
   #Preconditioned JFNK (default)
   solve_type = 'PJFNK'
@@ -257,6 +263,5 @@
 
 [Outputs]
   exodus = true
-  vtk = true
 []
 

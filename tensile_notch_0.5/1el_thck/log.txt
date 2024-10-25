@@ -1,0 +1,155 @@
+
+[36m
+*** Info ***
+SolidMechanics Action: selecting 'incremental finite strain' formulation.[39m
+Using EXPERIMENTAL Stateful Material Property projection with Adaptivity!
+Framework Information:
+MOOSE Version:           git commit e7a20f90eb on 2024-03-08
+LibMesh Version:         
+PETSc Version:           3.20.3
+SLEPc Version:           3.20.1
+Current Time:            Mon Apr  8 13:01:57 2024
+Executable Timestamp:    Mon Mar 11 08:57:06 2024
+
+Parallelism:
+  Num Processors:          8
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          3
+  Spatial Dimension:       3
+  Nodes:                   
+    Total:                 3824
+    Local:                 520
+    Min/Max/Avg:           414/520/478
+  Elems:                   
+    Total:                 1822
+    Local:                 228
+    Min/Max/Avg:           226/234/227
+  Num Subdomains:          10
+  Num Partitions:          8
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                11472
+  Num Local DOFs:          1560
+  Variables:               { "disp_x" "disp_y" "disp_z" } 
+  Finite Element Types:    "LAGRANGE" 
+  Approximation Orders:    "FIRST" 
+
+Auxiliary System:
+  Num DOFs:                22404
+  Num Local DOFs:          2928
+  Variables:               { "resid_x" "resid_y" "resid_z" } { "von_mises" "stress_zz" "peeq" "pe11" 
+                             "pe22" "pe33" } 
+  Finite Element Types:    "LAGRANGE" "MONOMIAL" 
+  Approximation Orders:    "FIRST" "CONSTANT" 
+
+Execution Information:
+  Executioner:             Transient
+  TimeStepper:             ConstantDT
+  TimeIntegrator:          ImplicitEuler
+  Solver Mode:             Preconditioned JFNK
+  PETSc Preconditioner:    boomeramg strong_threshold: 0.7 (auto)
+  MOOSE Preconditioner:    SMP
+
+
+Time Step 0, time = 0
+
+Postprocessor Values:
++----------------+----------------+
+| time           | right_react_x  |
++----------------+----------------+
+|   0.000000e+00 |   0.000000e+00 |
++----------------+----------------+
+
+
+Time Step 1, time = 0.001, dt = 0.001
+ 0 Nonlinear |R| = [32m7.819890e+02[39m
+      0 Linear |R| = [32m7.819890e+02[39m
+      1 Linear |R| = [32m3.000408e+01[39m
+      2 Linear |R| = [32m1.702581e+01[39m
+      3 Linear |R| = [32m1.182213e+01[39m
+      4 Linear |R| = [32m7.909628e+00[39m
+      5 Linear |R| = [32m6.383843e+00[39m
+      6 Linear |R| = [32m5.846721e+00[39m
+      7 Linear |R| = [32m4.468194e+00[39m
+      8 Linear |R| = [32m3.375614e+00[39m
+      9 Linear |R| = [32m2.982163e+00[39m
+     10 Linear |R| = [32m2.745033e+00[39m
+     11 Linear |R| = [32m2.601317e+00[39m
+     12 Linear |R| = [32m2.448050e+00[39m
+     13 Linear |R| = [32m2.260853e+00[39m
+     14 Linear |R| = [32m2.024182e+00[39m
+     15 Linear |R| = [32m1.823961e+00[39m
+     16 Linear |R| = [32m1.649887e+00[39m
+     17 Linear |R| = [32m1.537639e+00[39m
+     18 Linear |R| = [33m1.475052e+00[39m
+     19 Linear |R| = [33m1.427558e+00[39m
+     20 Linear |R| = [33m1.381059e+00[39m
+     21 Linear |R| = [33m1.332004e+00[39m
+     22 Linear |R| = [33m1.276455e+00[39m
+     23 Linear |R| = [33m1.219959e+00[39m
+     24 Linear |R| = [32m1.157084e+00[39m
+     25 Linear |R| = [32m1.092288e+00[39m
+     26 Linear |R| = [32m1.037010e+00[39m
+     27 Linear |R| = [32m9.582995e-01[39m
+     28 Linear |R| = [32m8.743283e-01[39m
+     29 Linear |R| = [32m7.824744e-01[39m
+     30 Linear |R| = [32m6.851327e-01[39m
+     31 Linear |R| = [32m6.389390e-01[39m
+     32 Linear |R| = [32m5.949542e-01[39m
+     33 Linear |R| = [32m5.557160e-01[39m
+     34 Linear |R| = [32m5.163399e-01[39m
+     35 Linear |R| = [32m4.745337e-01[39m
+     36 Linear |R| = [32m4.472884e-01[39m
+     37 Linear |R| = [33m4.280647e-01[39m
+     38 Linear |R| = [33m4.108243e-01[39m
+     39 Linear |R| = [33m3.943532e-01[39m
+     40 Linear |R| = [33m3.784974e-01[39m
+     41 Linear |R| = [32m3.580605e-01[39m
+     42 Linear |R| = [32m3.302747e-01[39m
+     43 Linear |R| = [32m3.055337e-01[39m
+     44 Linear |R| = [32m2.873208e-01[39m
+     45 Linear |R| = [32m2.712470e-01[39m
+     46 Linear |R| = [33m2.579446e-01[39m
+     47 Linear |R| = [33m2.483530e-01[39m
+     48 Linear |R| = [33m2.389046e-01[39m
+     49 Linear |R| = [33m2.286160e-01[39m
+     50 Linear |R| = [32m2.127407e-01[39m
+     51 Linear |R| = [32m1.913627e-01[39m
+     52 Linear |R| = [32m1.712641e-01[39m
+     53 Linear |R| = [32m1.489744e-01[39m
+     54 Linear |R| = [32m1.356858e-01[39m
+     55 Linear |R| = [32m1.243088e-01[39m
+     56 Linear |R| = [32m1.113932e-01[39m
+     57 Linear |R| = [32m9.859759e-02[39m
+     58 Linear |R| = [32m8.849834e-02[39m
+     59 Linear |R| = [32m8.137552e-02[39m
+     60 Linear |R| = [32m7.513436e-02[39m
+     61 Linear |R| = [33m7.167735e-02[39m
+     62 Linear |R| = [33m6.815224e-02[39m
+     63 Linear |R| = [32m6.438377e-02[39m
+     64 Linear |R| = [33m6.148880e-02[39m
+     65 Linear |R| = [33m5.929051e-02[39m
+     66 Linear |R| = [33m5.681929e-02[39m
+     67 Linear |R| = [33m5.417819e-02[39m
+     68 Linear |R| = [33m5.250299e-02[39m
+     69 Linear |R| = [33m4.991838e-02[39m
+     70 Linear |R| = [33m4.785884e-02[39m
+     71 Linear |R| = [33m4.568803e-02[39m
+     72 Linear |R| = [33m4.382587e-02[39m
+[mpiexec@weldform] Sending Ctrl-C to processes as requested
+[mpiexec@weldform] Press Ctrl-C again to force abort
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 31656 RUNNING AT weldform
+=   EXIT CODE: 2
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Interrupt (signal 2)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
